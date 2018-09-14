@@ -3,8 +3,36 @@
   <head>
     <meta charset="utf-8">
     <title>To do List</title>
+    <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
+    <script type="text/javascript">
+      function createElementFun() {
+        var para = document.createElement("p");
+        var inputtext = document.getElementById('text').value;
+        document.getElementById('text').value = "";
+        var node = document.createTextNode(inputtext);
+        para.appendChild(node);
+        var element = document.getElementById("new_element");
+        element.appendChild(para);
+        var arr = [];
+        arr.push(inputtext);
+        //alert(arr);
+        var myJson = JSON.stringify(arr);
+        alert(myJson);
+        var arr1 = JSON.parse(myJson);
+        console.log(arr1);
+        // alert(arr1[0]);
 
+        localStorage.setItem("server", myJson);
+        var output = localStorage.getItem("server");
+
+      }
+    </script>
+    <input type="text" id="text" name="addtodo" placeholder="Type......" value="">
+    <input type="button" onclick="createElementFun()" name="submit" value="Submit">
+     <p id="new_element">
+
+    </p>
   </body>
 </html>
