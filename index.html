@@ -6,33 +6,7 @@
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
-    <script type="text/javascript">
-    var arr = [];
-      function createElementFun() {
-        var para = document.createElement("p");
-        var inputtext = document.getElementById('text').value;
-        document.getElementById('text').value = "";
-        var node = document.createTextNode(inputtext);
-        para.appendChild(node);
-        var element = document.getElementById("new_element");
-        element.appendChild(para);
-        //var arr = [];
-        arr.push(inputtext);
-        //alert(arr);
-        var myJson = JSON.stringify(arr);
-        alert(myJson);
-        var arr1 = JSON.parse(myJson);
-        //console.log("arr1");
-         alert(arr1);
-        // arr.forEach(function(element) {
-        // alert(element);});
-        localStorage.setItem("server", myJson);
-        var output = localStorage.getItem("server");
-
-      }
-      arr.forEach(function(element) {
-      alert(element);});
-    </script>
+    <script src="script.js"></script>
     <input type="text" id="text" name="addtodo" placeholder="Type......" value="">
     <input type="button" onclick="createElementFun()" name="submit" value="Submit">
      <p id="new_element">
