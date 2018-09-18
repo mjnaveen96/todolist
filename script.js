@@ -10,10 +10,17 @@ function createnode(val) {
 //create a new new_element
 
   function createElementFun() {
-    var out_text = local_entry();
-    var no1 = out_text.length;
-    var inputtext = out_text[no1-1].valu;
-    show(inputtext, no1-1);
+    if (document.getElementById('text').value!="") 
+    {
+      var out_text = local_entry();
+      var no1 = out_text.length;
+      var inputtext = out_text[no1-1].valu;
+      show(inputtext, no1-1);
+    }
+    else
+    {
+      alert("ENTER THE TO DO ITEM");
+    }
  }
 
 //function for storing data to the local storage
@@ -50,10 +57,12 @@ function show(intext, id) {
   var inputtext = intext;
   var para = document.createElement("div");
   para.setAttribute("class", "outer");
-  para.innerHTML = "<div class = 'each_node'><span id='"+id+"'>"+inputtext+"</span><div class = 'tick'><span>✔</span></div><div class = 'close'><span onclick = 'remove("+id+")'>✖</span></div></div>";
+  para.innerHTML = "<div class = 'each_node'><span id='"+id+"'>"+inputtext+"</span><div class = 'tick'><span onclick = 'check("+id+")'>✔</span></div><div class = 'close'><span onclick = 'remove("+id+")'>✖</span></div></div>";
   var element = document.getElementById("new_element");
   element.append(para);
 }
+
+// removes values from the local storage
 
 function remove(t) {
   arr.splice(t, 1);
@@ -64,3 +73,12 @@ function remove(t) {
     show(arr[i].valu, i);
   }
 }
+
+// checks the values in the to do list
+
+function check(a) {
+  //if (a===) {}
+  document.getElementById('new_element').style.textDecoration = "line-through";
+  // console.log(a);
+}
+
