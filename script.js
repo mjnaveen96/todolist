@@ -1,59 +1,66 @@
 var arr = [];
  var arr1 =[];
 
-window.addEventListener("load",onload);
+window.addEventListener("load",on_load);
+function createnode(val) {
+  this.valu = val;
+  this.status = true;
+  }
+
+//create a new new_element
 
   function createElementFun() {
     var out_text = local_entry();
     var no1 = out_text.length;
-    // alert(no1);
-    var para = document.createElement("p");
-    var inputtext = out_text[no1-1];/*document.getElementById('text').value;*/
-    document.getElementById('text').value = "";
-    var node = document.createTextNode(inputtext);
-    para.appendChild(node);
-    var element = document.getElementById("new_element");
-    element.appendChild(para);
+    var inputtext = out_text[no1-1].valu;
+    show(inputtext, no1-1);
  }
 
+//function for storing data to the local storage
 
   function local_entry() {
     var inputtext = document.getElementById('text').value;
     document.getElementById('text').value = "";
-    arr.push(inputtext);
+    arr.push(new createnode(inputtext));
     var myJson = JSON.stringify(arr);
-    // alert(myJson);
     localStorage.setItem("server", myJson);
     var output = localStorage.getItem("server");
     arr1 = JSON.parse(output);
-    // alert(arr1);
-    var no = arr1.length;
-    // alert(no);
     return arr1;
   }
 
-function onload() {
+//function for loading the data from local server when page loads
+
+function on_load() {
   var output = localStorage.getItem("server");
   arr1 = JSON.parse(output);
   var no = arr1.length;
   for (var i = 0; i < no; i++) {
-    var para = document.createElement("p");
-    var inputtext = arr1[i];/*document.getElementById('text').value;*/
-    document.getElementById('text').value = "";
-    var node = document.createTextNode(inputtext);
-    para.appendChild(node);
-    var element = document.getElementById("new_element");
-    element.appendChild(para);
+    arr[i] = arr1[i];
+  }
+  for (var i = 0; i < no; i++) {
+    var inputtext = arr1[i].valu;
+    show(inputtext, i);
   }
 }
 
-function createnode(val) {
-  this.value = val;
-  this.status = true;
-  // this.name = function() { this.value+" "+ this.status;
+// show values in the local storage
 
-  }
+function show(intext, id) {
+  var inputtext = intext;
+  var para = document.createElement("div");
+  para.setAttribute("class", "outer");
+  para.innerHTML = "<div class = 'each_node'><span id='"+id+"'>"+inputtext+"</span><div class = 'tick'><span>✔</span></div><div class = 'close'><span onclick = 'remove("+id+")'>✖</span></div></div>";
+  var element = document.getElementById("new_element");
+  element.append(para);
 }
 
-var nav = new createnode("raju");
-alert(nav);
+function remove(t) {
+  arr.splice(t, 1);
+  var myJson = JSON.stringify(arr);
+  localStorage.setItem("server", myJson);
+  document.getElementById("new_element").innerHTML = "";
+  for (var i = 0; i < arr.length; i++) {
+    show(arr1[i].valu, i);
+  }
+}

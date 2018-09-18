@@ -1,6 +1,59 @@
 body {
-  margin: 100px;
-  background-color: lightgray;
+  margin: 10px;
+  /* background-color: black; */
   padding: 50px;
   border-radius: 15px;
+}
+
+.header {
+  box-sizing: border-box;
+  border: 3px solid red;
+  border-radius: 10px;
+  background-color: lightblue;
+  width: 600px;
+  height: 50px;
+  padding:12px;
+  margin: 10px;
+}
+
+.each_node {
+   position: relative;
+  box-sizing: border-box;
+  border: 3px solid red;
+  border-radius: 10px;
+  background-color: yellow;
+  width: 600px;
+  height: 50px;
+  padding:12px;
+  margin: 10px;
+  }
+
+
+  .close {
+    margin: 5px;
+  position: absolute;
+  top: 0px;
+  right: 25px;
+  box-sizing: border-box;
+  /* background-color: lightgray; */
+  padding: 2px;
+  width: 30px;
+  height: 35px;
+  text-align: center;
+  font-size: 25px;
+}
+
+.tick {
+  margin: 5px;
+  position: absolute;
+  top: 0px;
+  right: 55px;
+  box-sizing: border-box;
+  box-sizing: border-box;
+  /* background-color: lightgray; */
+  padding: 2px;
+  width: 30px;
+  height: 35px;
+  text-align: center;
+  font-size: 25px;
 }
