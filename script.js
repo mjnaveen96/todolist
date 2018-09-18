@@ -61,6 +61,6 @@ function remove(t) {
   localStorage.setItem("server", myJson);
   document.getElementById("new_element").innerHTML = "";
   for (var i = 0; i < arr.length; i++) {
-    show(arr1[i].valu, i);
+    show(arr[i].valu, i);
   }
 }
