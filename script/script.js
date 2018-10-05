@@ -6,11 +6,10 @@
 
 */
 
-
-
 var arr    =  [];
 var arr1   =  [];
-
+var active = null;
+var btn = document.getElementsByClassName("button");
 window.addEventListener("load",on_Load);
 
 //create node function
@@ -29,17 +28,23 @@ function createNode(val) {
       document.getElementById('text').value = "";
       arr.push(new createNode(inputtext));
       save();
-      on_Load();
+      if(active === null) on_Load(); else if(active === true) completed(); else notcompleted();
     }
     else
     {
-      alert("PLEASE ENTER THE INPUT");
+      alert("Please Enter the Input");
     }
  }
+
+ // function for storing to localStorage
+
 function save() {
   var myJson  =  JSON.stringify(arr);
   localStorage.setItem("server", myJson);
 }
+
+//function for getting from localstorage
+
 function getValues() {
   var output  =  localStorage.getItem("server");
   arr1        =  JSON.parse(output);
@@ -48,6 +53,7 @@ function getValues() {
 //function for loading the data from local server when page loads
 
 function on_Load() {
+  active = null;
   getValues();
   if(arr1!=null) {
     var no  =  arr1.length;
@@ -64,6 +70,19 @@ function on_Load() {
 // show values in the local storage
 
 function show(intext, id) {
+  if(active === null) {
+    btn[1].setAttribute("class", "button");
+    btn[2].setAttribute("class", "button");
+    btn[3].setAttribute("class", "button active");
+  } else if(active === true) {
+    btn[1].setAttribute("class", "button active");
+    btn[2].setAttribute("class", "button");
+    btn[3].setAttribute("class", "button");
+  } else {
+    btn[1].setAttribute("class", "button");
+    btn[2].setAttribute("class", "button active");
+    btn[3].setAttribute("class", "button");
+  }
   var c  =  "";
   if(intext.status === true) {
     c = " checked";
@@ -102,18 +121,21 @@ function check(a) {
 //completed button
 
 function completed() {
+  active = true;
+  getValues();
   document.getElementById("new_element").innerHTML = "";
   for (var i=0; i < arr1.length; i++) {
     if (arr1[i].status === true) {
      show(arr1[i],i);
     }
   }
-  onclick  =  "on_Load()";
 }
 
-//notcomplted button
+//notcompleted button
 
 function notcompleted() {
+  active = false;
+  getValues();
   document.getElementById("new_element").innerHTML = "";
   for (var i = 0; i < arr1.length; i++) {
     if (arr1[i].status === false) {
