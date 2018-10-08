@@ -22,10 +22,14 @@ function createNode(val) {
 //create a new new_element
 
   function createElementFun() {
-    if (document.getElementById('text').value!="")
+    // if (document.getElementById('text').value!="")
+     if($("#text").val()!="")
     {
-      var inputtext  =  document.getElementById('text').value;
-      document.getElementById('text').value = "";
+      // alert("Value: " + $("#text").val());
+      // var inputtext  =  document.getElementById('text').value;
+      var inputtext  =  $("#text").val();
+      // alert(inputtext);
+      $("#text").val()  =  "";
       arr.push(new createNode(inputtext));
       save();
       if(active === null) on_Load(); else if(active === true) completed(); else notcompleted();
