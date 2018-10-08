@@ -29,7 +29,7 @@ function createNode(val) {
       // var inputtext  =  document.getElementById('text').value;
       var inputtext  =  $("#text").val();
       // alert(inputtext);
-      $("#text").val()  =  "";
+      document.getElementById('text').value = "";
       arr.push(new createNode(inputtext));
       save();
       if(active === null) on_Load(); else if(active === true) completed(); else notcompleted();
