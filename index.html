@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <title>To do List</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <link rel="stylesheet" href="css/style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   </head>
-  <body>
+  <body ng-app="toDoList" ng-controller="myCtrl">
     <script src="script/script.js"></script>
     <div class="container">
     <div class="header">
@@ -15,9 +15,9 @@
     <div class="header">
       <!-- <div class="main_header"><p>To Do's</p></div -->
       <input type="text" id="text" name="addtodo" placeholder="Type......" value="">
-      <input class="button" type="button" id="button"  name="submit" value="Submit">
-      <input class="button" type="button" id="completed" name="completed" value="Completed">
-      <input class="button" type="button" id="notcomplted"  name="completed" value="Not completed">
+      <input class="button" type="button" id="button" onclick="createElementFun()" name="submit" value="Submit">
+      <input class="button" type="button" id="completed" onclick="completed()" name="completed" value="Completed">
+      <input class="button" type="button" id="notcomplted" onclick="notcompleted()" name="completed" value="Not completed">
       <input class="button" type="button" id="all" onclick="on_Load()" name="all" value="All">
     </div>
     <div id="new_element"></div>

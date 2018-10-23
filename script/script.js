@@ -9,8 +9,7 @@
 var arr    =  [];
 var arr1   =  [];
 var active = null;
- var btn = document.getElementsByClassName("button");
-// var btn = $("#button");
+var btn = document.getElementsByClassName("button");
 window.addEventListener("load",on_Load);
 
 //create node function
@@ -22,42 +21,22 @@ function createNode(val) {
 
 //create a new new_element
 
- //  function createElementFun() {
- //    // if (document.getElementById('text').value!="")
- //     if($("#text").val()!="")
- //    {
- //      // alert("Value: " + $("#text").val());
- //      // var inputtext  =  document.getElementById('text').value;
- //      var inputtext  =  $("#text").val();
- //      // alert(inputtext);
- //      // document.getElementById('text').value = "";
- //      $("#text").val("");
- //      arr.push(new createNode(inputtext));
- //      save();
- //      if(active === null) on_Load(); else if(active === true) completed(); else notcompleted();
- //    }
- //    else
- //    {
- //      alert("Please Enter the Input");
- //    }
- // }
-
- $(document).ready(function(){
-   $("#button").click(function(){
-     if($("#text").val()!="")
-     {
-       var inputtext  =  $("#text").val();
-       $("#text").val("");
-       arr.push(new createNode(inputtext));
-       save();
-       if(active === null) on_Load(); else if(active === true) completed(); else notcompleted();
+  function createElementFun() {
+    if (document.getElementById('text').value!="")
+    {
+      var inputtext  =  document.getElementById('text').value;
+      document.getElementById('text').value = "";
+      arr.push(new createNode(inputtext));
+      save();
+      if(active === null) on_Load(); else if(active === true) completed(); else notcompleted();
     }
     else
     {
       alert("Please Enter the Input");
     }
-   });
- });
+ }
+
+ var toDo = angular.module('toDoList',[]);
 
  // function for storing to localStorage
 
@@ -69,7 +48,6 @@ function save() {
 //function for getting from localstorage
 
 function getValues() {
-  // var output  =  $().load("server");
   var output  =  localStorage.getItem("server");
   arr1        =  JSON.parse(output);
 }
@@ -85,7 +63,6 @@ function on_Load() {
       arr[i]  =  arr1[i];
     }
     document.getElementById("new_element").innerHTML = "";
-    // $("#new_element").val("");
     for (var i=0; i < no; i++) {
       show(arr1[i], i);
     }
@@ -116,11 +93,9 @@ function show(intext, id) {
   }
   var inputtext  =  intext.valu;
   var para       =  document.createElement("div");
-  // var para       =  $("<div></div>");
   para.setAttribute("class", "outer");
   para.innerHTML =  "<div class = 'each_node'><span class='"+c+"' id='"+id+"'>"+inputtext+"</span><div class = 'tick'><span onclick = 'check("+id+")'>✔</span></div><div class = 'close'><span onclick = 'remove("+id+")'>✖</span></div></div>";
-  // var element    =  document.getElementById("new_element");
-  var element    =  $("#new_element");
+  var element    =  document.getElementById("new_element");
   element.append(para);
 }
 
@@ -147,31 +122,26 @@ function check(a) {
 
 //completed button
 
-$(document).ready(function(){
-  $("#completed").click(function(){
-    active = true;
-    getValues();
-    document.getElementById("new_element").innerHTML = "";
-    for (var i=0; i < arr1.length; i++) {
-      if (arr1[i].status === true) {
-       show(arr1[i],i);
-      }
+function completed() {
+  active = true;
+  getValues();
+  document.getElementById("new_element").innerHTML = "";
+  for (var i=0; i < arr1.length; i++) {
+    if (arr1[i].status === true) {
+     show(arr1[i],i);
     }
-  })
-})
+  }
+}
 
 //notcompleted button
 
-
-$(document).ready(function(){
-  $("#notcomplted").click(function(){
-    active = false;
-    getValues();
-    document.getElementById("new_element").innerHTML = "";
-    for (var i = 0; i < arr1.length; i++) {
-      if (arr1[i].status === false) {
-       show(arr1[i],i);
-      }
+function notcompleted() {
+  active = false;
+  getValues();
+  document.getElementById("new_element").innerHTML = "";
+  for (var i = 0; i < arr1.length; i++) {
+    if (arr1[i].status === false) {
+     show(arr1[i],i);
     }
-  });
-});
+  }
+}
